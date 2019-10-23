@@ -1,0 +1,44 @@
+<%= milkshake.errors.any? %>
+
+<% if milkshake.errors.any? %>
+<p>wayne</p>
+    <% for error in milkshake.errors.full_messages %>
+        <p><%= error %></p>
+<p>wayne</p>
+    <% end %>
+<% end %>
+
+<%= form_with model: milkshake, local: true do |form| %>
+
+    <div>
+        <%= form.label :name%>
+        <%= form.text_field :name%>
+    </div>
+
+    <div>
+        <%= form.label :description%>
+        <%= form.text_field :description%>
+    </div>
+
+    <div>
+        <%= form.label :price, "Price (in cents)"%>
+        <%= form.number_field :price, min: 0%>
+    </div>
+
+    <div>
+    <%= form.label :pic %>
+    <%= form.file_field :pic, accept: "image/png, impage/gif, image/jpg, imapge/jpeg" %>
+    </div>
+
+    <div>
+        <%= form.collection_check_boxes :ingredient_ids, ingredient, :id, :name %>
+    
+    </div>
+
+    <div>
+        <%= form.submit :pic%>
+    
+    </div>
+
+
+<%end%>

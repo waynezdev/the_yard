@@ -16,7 +16,13 @@ ingredients = [
 if Ingredient.count == 0 
     for ingredient in ingredients
         ingredient = Ingredient.create(ingredient)
-        ingredient.create_image(url: Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+
+        
+        # ingredient.create_image(url: Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+        temp_ingredient_pic = Down.download(Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+        ingredient.pic.attach(io: temp_ingredient_pic, filename: File.basename(temp_ingredient_pic.path))
+        
+        
         puts "created ingredient #{ingredient.name}"
     end
 end
@@ -32,7 +38,9 @@ for i in 1..50
         description: Faker::Lorem.paragraph
     )
 
-    milkshake.create_image(url: Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+    # milkshake.create_image(url: Faker::LoremPixel.image + "?random=" + rand(1..1000).to_s)
+    temp_milkshake_file = Down.download(Faker::LoremPixel.image + "?random=" + rand(1..100).to_s)
+    milkshake.pic.attach(io: temp_milkshake_file, filename: File.basename(temp_milkshake_file.path))
 
     puts "created milkshake #{milkshake.name}"
 
